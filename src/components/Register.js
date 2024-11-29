@@ -1,57 +1,76 @@
 import React, { useState } from "react";
-import UserServices from "../services/UserServices"; // Import the updated UserServices
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../utils/auth"; // Import authentication context
+import "../styles/Register.css"; // Ensure your CSS is imported
 
 const Register = () => {
+  const { register } = useAuth(); // Register function from AuthContext
+  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [role, setRole] = useState(""); // Initially no role is selected
+  const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match");
-      return;
-    }
-
-    try {
-      await UserServices.register({ email, password }); // Register the user
-      navigate("/login"); // Redirect to login page after successful registration
-    } catch (error) {
-      setErrorMessage("Registration failed. Please try again.");
+    if (userName && email && password && role) {
+      try {
+        await register(userName, email, password, role);
+        setSuccessMessage("Registration successful! You can now log in.");
+        setErrorMessage("");
+      } catch (error) {
+        setErrorMessage("Registration failed. Please try again.");
+        setSuccessMessage("");
+      }
+    } else {
+      setErrorMessage("Please fill in all fields");
+      setSuccessMessage("");
     }
   };
 
   return (
-    <div className="register-form">
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          placeholder="Password"
-        />
-        <input
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-          placeholder="Confirm Password"
-        />
-        {errorMessage && <div className="error">{errorMessage}</div>}
-        <button type="submit">Register</button>
-      </form>
+    <div className="page-container"> {/* Center the form */}
+      <div className="register-form">
+        <h2>Register</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+            required
+            placeholder="User Name"
+          />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            placeholder="Email"
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            placeholder="Password"
+          />
+          <select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            required
+          >
+            <option value="" disabled>
+              Select Role
+            </option>
+            <option value="Agent">Agent</option>
+            <option value="Admin">Admin</option>
+            <option value="Customer">Customer</option>
+          </select>
+          {successMessage && <div className="success">{successMessage}</div>}
+          {errorMessage && <div className="error">{errorMessage}</div>}
+          <button type="submit">Register</button>
+        </form>
+      </div>
     </div>
   );
 };

@@ -1,8 +1,16 @@
-/* src/components/Register.css */
-.register-container {
+/* Center the page container */
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensures full height of the viewport */
+    background-color: #f0f0f0; /* Optional: background color for the page */
+  }
+  
+  /* Register form container */
+  .register-form {
     width: 100%;
     max-width: 400px;
-    margin: 50px auto;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -15,7 +23,8 @@
     color: #333;
   }
   
-  input {
+  input,
+  select {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
@@ -41,6 +50,13 @@
     background-color: #218838;
   }
   
+  .success {
+    color: green;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
   .error {
     color: red;
     font-size: 14px;
@@ -60,4 +76,5 @@
   a:hover {
     text-decoration: underline;
   }
+  
   
