@@ -24,7 +24,7 @@ const ImageComponent = () => {
       <img src={logo} alt="RoadReady Logo" style={{ width: '200px', marginBottom: '20px' }} />
       
       {/* Welcome Text */}
-      <h1>Welcome to RoadReady</h1>
+      <h1>RoadReady</h1>
       <p>Your trusted car rental platform</p>
     </div>
   );

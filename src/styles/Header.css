@@ -1,0 +1,33 @@
+/* Sidebar container */
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    background-color: #f4f4f4;
+    padding: 20px;
+    position: fixed; /* Keep sidebar fixed on the left */
+  }
+  
+  /* Style the navigation list */
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Style each navigation item */
+  .sidebar li {
+    margin-bottom: 20px; /* Add spacing between links */
+  }
+  
+  /* Style the links */
+  .sidebar a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #333;
+    transition: color 0.3s ease;
+  }
+  
+  .sidebar a:hover {
+    color: #007bff; /* Change color on hover */
+  }
+  
